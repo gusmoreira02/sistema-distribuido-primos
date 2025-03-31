@@ -1,0 +1,11 @@
+version: '3.8'
+
+services:
+  mpi:
+    build: .
+    deploy:
+      replicas: 1
+    environment:
+      - OMPI_ALLOW_RUN_AS_ROOT=1
+      - OMPI_ALLOW_RUN_AS_ROOT_CONFIRM=1
+    command: mpirun -n 4 python3 primos_mpi.py
