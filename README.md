@@ -10,7 +10,6 @@ Este projeto demonstra a aplicação de um sistema distribuído usando o framewo
 ✔️ Utiliza **MPI** para distribuir a tarefa entre múltiplos processos  
 ✔️ Simula múltiplos computadores via Docker + MPI  
 ✔️ Pronto para rodar em Linux, Docker 
-✔️ Repositório clonado com um único comando
 
 ## 📦 Clonar o projeto
 
