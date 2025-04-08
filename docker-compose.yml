@@ -1,18 +1,32 @@
 version: '3.8'
 
 services:
-  mpi:
+  node1:
     build: .
+    hostname: node1
     environment:
       - OMPI_ALLOW_RUN_AS_ROOT=1
       - OMPI_ALLOW_RUN_AS_ROOT_CONFIRM=1
-    command: mpirun -n 4 python3 primos_mpi.py
+    volumes:
+      - .:/app
+    working_dir: /app
+    command: mpirun --allow-run-as-root -np 2 python primos_mpi.py
     networks:
-      - mpi-net
+      - mpi_network
+
+  node2:
+    build: .
+    hostname: node2
+    environment:
+      - OMPI_ALLOW_RUN_AS_ROOT=1
+      - OMPI_ALLOW_RUN_AS_ROOT_CONFIRM=1
+    volumes:
+      - .:/app
+    working_dir: /app
+    command: mpirun --allow-run-as-root -np 2 python primos_mpi.py
+    networks:
+      - mpi_network
 
 networks:
-  mpi-net:
+  mpi_network:
     driver: bridge
-    ipam:
-      config:
-        - subnet: "172.25.0.0/16"

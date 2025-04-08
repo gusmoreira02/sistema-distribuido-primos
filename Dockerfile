@@ -1,14 +1,16 @@
 FROM python:3.11-slim
 
-# Instalar dependências necessárias
-RUN apt-get update && apt-get install -y openmpi-bin libopenmpi-dev \
-    && pip install --no-cache-dir mpi4py
+RUN apt-get update && \
+    apt-get install -y \
+    openmpi-bin \
+    libopenmpi-dev \
+    openssh-client \
+    && rm -rf /var/lib/apt/lists/*
 
-# Defina o diretório de trabalho
 WORKDIR /app
+COPY requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
 
-# Copiar o código para o diretório do container
 COPY . .
 
-# Comando para executar o script
-CMD ["python3", "primos_mpi.py"]
+CMD ["sleep", "infinity"]
